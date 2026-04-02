@@ -1,0 +1,13 @@
+SW-Core# show interfaces status
+Port      Name               Status       Vlan       Duplex  Speed Type
+Gi0/24    Finance-Dept       err-disabled 10         auto    auto  10/100/1000BaseTX
+
+SW-Core# show errdisable recovery
+ErrDisable Reason    Detection    Mode
+-----------------    ---------    ----
+bpduguard            Enabled      automatic
+
+SW-Core# show spanning-tree summary
+Switch is in pvst mode
+Root bridge for: VLAN0010
+PortFast BPDU Guard Default is enabled
