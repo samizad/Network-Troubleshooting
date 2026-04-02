@@ -46,3 +46,11 @@ The network stabilized immediately. If the loop is reconnected, the switch now l
 Visibility: Always monitor CPU and STP topology changes during slowness.
 
 Security: Never leave access ports "naked"; always enable BPDU Guard on ports facing end-users.
+## 🛠 Tools Used
+- **Emulation:** Cisco Packet Tracer / EVE-NG
+- **Hardware:** Cisco Catalyst 3750 Series (Simulated)
+- **Protocol:** IEEE 802.1D (STP)
+
+## 📁 Attached Files
+- `SW-Core-Configs.txt`: Contains snippets of before/after configurations.
+- `verification_logs.txt`: Console output proving the fix works.
