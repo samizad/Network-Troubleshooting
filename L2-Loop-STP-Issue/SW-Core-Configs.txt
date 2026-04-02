@@ -1,0 +1,16 @@
+! --- Before Fix (Troubled Configuration) ---
+interface GigabitEthernet0/24
+ description Connection to Finance Dept
+ switchport mode access
+ switchport access vlan 10
+ ! Missing BPDU Guard and PortFast
+!
+
+! --- After Fix (Hardened Configuration) ---
+interface GigabitEthernet0/24
+ description Connection to Finance Dept
+ switchport mode access
+ switchport access vlan 10
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
