@@ -3,4 +3,5 @@ A collection of real-world network troubleshooting scenarios, focusing on root c
 
 
 | Case ID | Issue Type | Technology | Status |
+
 | Case-01 | L2 Loop & Broadcast Storm | STP / BPDU Guard | ✅ Resolved |
