@@ -1,1 +1,48 @@
 
+Case Study: Troubleshooting Layer 2 Loop & Broadcast Storm
+
+## 📋 Problem Report
+- **User Report:** Finance department experiencing severe network latency and intermittent outages.
+- **Physical Symptom:** Switch port LEDs flickering rapidly (Broadcast Storm indication).
+
+---
+
+## 🔍 Step 1: Symptom Verification
+Checked the Core Switch CPU usage to confirm the impact on the control plane.
+
+```bash
+SW-Core# show processes cpu sorted
+CPU utilization for five seconds: 98%/1%; one minute: 95%; five minutes: 90%
+🛰️ Step 2: Identifying the Source
+Checking STP statistics to find the unstable port.
+
+Bash
+SW-Core# show spanning-tree detail | include from|occurrence
+Number of topology changes 148 last change occurred 00:00:05 ago from GigabitEthernet0/24
+Key Finding: The topology is flapping every few seconds, and the changes are originating from interface G0/24.
+
+💡 Step 3: Root Cause Analysis (RCA)
+Investigation: Found an unauthorized unmanaged desktop switch connected to port G0/24.
+
+Root Cause: A user created a physical loop on the unmanaged switch (plugged both ends of a cable into it). Since it doesn't run STP, it forwarded the loop back to the Core Switch.
+
+🛠️ Step 4: Resolution & Prevention
+Immediate Mitigation
+Code snippet
+SW-Core(config)# interface g0/24
+SW-Core(config-if)# shutdown
+Proactive Hardening
+Implemented BPDU Guard and PortFast to prevent future incidents.
+
+Code snippet
+SW-Core(config-if)# spanning-tree portfast
+SW-Core(config-if)# spanning-tree bpduguard enable
+SW-Core(config-if)# no shutdown
+✅ Step 5: Final Verification
+The network stabilized immediately. If the loop is reconnected, the switch now logs:
+%PM-4-ERR_DISABLE: bpduguard error detected on Gi0/24, putting Gi0/24 in error-disable state
+
+🧠 Key Takeaways
+Visibility: Always monitor CPU and STP topology changes during slowness.
+
+Security: Never leave access ports "naked"; always enable BPDU Guard on ports facing end-users.
