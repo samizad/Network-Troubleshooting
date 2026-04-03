@@ -1,0 +1,7 @@
+🎯 Scenario
+
+After completing the network configuration, users report that:
+
+PC-A can successfully ping its default gateway
+PC-B can successfully ping its default gateway
+❌ PC-A cannot ping PC-B
