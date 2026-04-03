@@ -1,0 +1,71 @@
+🧠 Analysis
+
+Subnetting was correctly implemented:
+
+Each device has a valid IP address within its subnet
+Each device can reach its default gateway
+
+However:
+
+👉 Since LAN-A and LAN-B are in different subnets, communication between them requires Layer 3 routing (router).
+
+🔍 Troubleshooting Steps
+Step 1: Verify Local Connectivity
+
+PC-A → Gateway
+
+ping 192.168.0.1
+
+✅ Success
+
+PC-B → Gateway
+
+ping 192.168.0.65
+
+✅ Success
+
+✔️ Conclusion: Subnetting and local configuration are correct.
+
+Step 2: Test Inter-Subnet Communication
+ping 192.168.0.126
+
+❌ Failed
+
+👉 Indicates a Layer 3 (routing) issue.
+
+Step 3: Check Router Interfaces
+show ip interface brief
+
+Result:
+
+G0/0 → up/up
+G0/1 → administratively down ❌
+🛠 Solution
+
+Enable the router interface connected to LAN-B:
+
+configure terminal
+interface g0/1
+no shutdown
+end
+🔁 Verification
+ping 192.168.0.126
+
+✅ Success
+
+🎯 Root Cause
+
+The router interface for LAN-B was shutdown, preventing routing between subnets.
+
+🧠 Key Insight
+
+Subnetting created multiple isolated networks.
+
+✔️ Local communication worked (within each subnet)
+❌ Inter-subnet communication failed due to missing routing
+
+👉 Subnetting requires proper routing to enable communication between networks.
+
+📌 Key Takeaway
+
+"Subnetting creates separate networks, but routing enables communication between them."
