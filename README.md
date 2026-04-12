@@ -7,3 +7,5 @@ A collection of real-world network troubleshooting scenarios, focusing on root c
 | Case-01 | L2 Loop & Broadcast Storm | STP / BPDU Guard | ✅ Resolved |
 
 |Case-02	|Inter-network connectivity |  IPv4 Routing    |	✅ Resolved |
+|Case-03	| access the web server  |  DNS and Connectivity Post-Upgrade    |	✅ Resolved |
+
