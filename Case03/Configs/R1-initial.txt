@@ -1,0 +1,31 @@
+! R1 Initial Configuration - Troubleshooting Lab
+! Status: INCORRECT CONFIGURATION
+!
+hostname R1
+!
+username Admin01 privilege 15 secret 5 $1$mERr$hx5ZzzSSc4dq9uTKJVsc6/
+!
+interface GigabitEthernet0/0
+ description LAN-S1
+ ip address 172.16.1.1 255.255.255.0
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/1
+ description LAN-S2
+ ! ERROR: Subnet mismatch. Should be 172.16.2.1
+ ip address 172.16.3.1 255.255.255.0 
+ duplex auto
+ speed auto
+!
+interface Serial0/0/0
+ description Connection to ISP
+ ip address 209.165.200.226 255.255.255.252
+!
+ip route 0.0.0.0 0.0.0.0 209.165.200.225
+!
+line vty 0 4
+ login local
+ transport input ssh
+!
+end
